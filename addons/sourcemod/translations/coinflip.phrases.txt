@@ -1,0 +1,61 @@
+"Phrases"
+{
+	"Invalid Arguments"
+	{
+		"en"	"Invalid arguments, no credits specified!"
+		"sv"	"Ogiltiga argument, inga credits specifierade!"
+	}
+	
+	"Client Lost"
+	{
+		"en"	"Sorry, you lost!"
+		"sv"	"Tyvärr, du förlorade!"
+	}
+	
+	"Client Won"
+	{
+		"#format"	"{1:d}"
+		"en"	"You won {1} credits!"
+		"sv"	"Du vann {1} credits!"
+	}
+	
+	"Client Won Announce"
+	{
+		"#format"	"{1:N},{2:d}"
+		"en"	"{1} won {2} credits with a coinflip!"
+		"sv"	"{1} vann {2} credits med coinflip!"
+	}
+	
+	"Too Many Credits"
+	{
+		"#format"	"{1:d}"
+		"en"	"You put too many credits into the bet. Max allowed credits are: {1}."
+		"sv"	"Du la in för många credits. Max tillåtna instats är {1}."
+	}
+	
+	"Too Few Credits"
+	{
+		"#format"	"{1:d}"
+		"en"	"You put in too little credits, minimum bet is {1}."
+		"sv"	"Du la in för lite credits, minimum instats är {1}."
+	}
+	
+	"Not Enough Credits"
+	{
+		"#format"	"{1:d}"
+		"en"	"You don't have enough credits. You have {1} credits currently."
+		"sv"	"Du har inte tillräckligt mycket credits. Du har {1} credits tillgängligt."
+	}
+	
+	"Wait Time"
+	{
+		"en"	"You cannot bet so close to your previous bet."
+		"sv"	"Du kan inte betta så nära ditt förra bet."
+	}
+	
+	"Wait Time Over"
+	{
+		"en"	"Wait time is over! You can now use !flip again!"
+		"sv"	"Väntetiden är över! Du kan nu använda !flip igen!"
+	}
+}
