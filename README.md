@@ -1,6 +1,7 @@
 # Coinflip [![Build Status](https://travis-ci.org/condolent/Coinflip.svg?branch=master)](https://travis-ci.org/condolent/Coinflip)
 Quite simple plugin, really.  
-Gives players ability to flip a coin with a 50/50 chance to win or lose. Most of the plugins' content is configurable.
+Gives players ability to flip a coin with a 50/50 chance to win or lose. Most of the plugins' content is configurable.  
+[AlliedModders](https://forums.alliedmods.net/showthread.php?p=2538932)
 
 ### Dependencies
 [Store by Zephyrus](https://forums.alliedmods.net/showthread.php?p=2376361#post2376361)
