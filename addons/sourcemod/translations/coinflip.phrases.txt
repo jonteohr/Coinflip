@@ -1,5 +1,10 @@
 "Phrases"
 {
+	"Invalid Client"
+	{
+		"en" "You must be in game to use this command!"
+	}
+	
 	"Invalid Arguments"
 	{
 		"en"	"Invalid arguments, no credits specified!"
