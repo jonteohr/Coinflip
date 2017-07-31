@@ -63,7 +63,7 @@ public Action sm_flip(int client, int args) {
 	int curCredits = Store_GetClientCredits(client);
 	int betCredits = StringToInt(betAmount);
 
-	if (curCredits > betCredits) { // not enough credits
+	if (curCredits < betCredits) { // not enough credits
 		CPrintToChat(client, "%s %t", prefix, "Not Enough Credits", curCredits);
 		return Plugin_Handled;
 	}
