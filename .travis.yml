@@ -1,0 +1,42 @@
+sudo: false
+
+addons:
+    apt_packages:
+        - lib32stdc++6
+
+env: 
+  global:
+    - INCLUDE=addons/sourcemod/scripting/include/
+    - SCRIPTING=addons/sourcemod/scripting/
+    - PLUGINS=addons/sourcemod/plugins/
+  matrix:
+    - SOURCEMOD=1.8
+
+before_install:
+  - mkdir build-env
+
+install:
+  - cd build-env
+  - wget -q "http://www.sourcemod.net/latest.php?version=1.8&os=linux" -O sourcemod.tar.gz
+  - tar -xzf sourcemod.tar.gz
+  - cd ../
+  - find build-env/addons/sourcemod/scripting/ -name "*.sp" -type f -delete
+  - cp -rv $SCRIPTING/. build-env/addons/sourcemod/scripting/
+  - cp -rv $INCLUDE/. build-env/addons/sourcemod/scripting/include/
+
+before_script:
+  - chmod +rx build-env/addons/sourcemod/scripting/spcomp
+  - chmod +rx build-env/addons/sourcemod/scripting/compile.sh
+  - cd build-env/addons/sourcemod/scripting/
+  
+script:
+  - ./compile.sh
+  
+after_success:
+  - cd ../../../..
+  - cp -rv build-env/addons/sourcemod/scripting/compiled/. $PLUGINS
+  - cd $PLUGINS
+  - find . -type f -exec curl --user $FTPUSER:$FTPPASS --ftp-create-dirs -T {} ftp://$HOME/$SOURCEMOD/{} \;
+  
+notifications:
+    email: false
