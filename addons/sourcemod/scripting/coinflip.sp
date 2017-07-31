@@ -1,5 +1,4 @@
 #include <sourcemod>
-#include <sdktools>
 #include <store>
 #include <colorvariables>
 
