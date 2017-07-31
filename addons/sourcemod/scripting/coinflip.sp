@@ -6,8 +6,10 @@
 #pragma semicolon 1
 #pragma newdecls required
 
-#define VERSION "1.1"
+#define VERSION "1.2"
+
 char prefix[] = "{yellow}[CoinFlip] {default}";
+
 int waitTime[MAXPLAYERS + 1];
 
 ConVar maxCredits;
@@ -40,69 +42,77 @@ public void OnPluginStart() {
 }
 
 public Action sm_flip(int client, int args) {
-	char arg[64];
-	GetCmdArgString(arg, sizeof(arg));
+
+	if (!IsValidClient(client)) { // invalid client
+		CPrintToChat(client, "%s %t", prefix, "Invalid Client"); 
+		return Plugin_Handled;
+	}
 	
-	int randomNum = GetRandomInt(0, 1);
+	if (args != 1) { // invalid argument count
+		CPrintToChat(client, "%s %t", prefix, "Invalid Arguments");
+		return Plugin_Handled;
+	}
+		
+	if (waitTime[client] > GetTime()) { // still in cooldown
+		CPrintToChat(client, "%s %t", prefix, "Wait Time");
+		return Plugin_Handled;
+	}
+	
+	char betAmount[64];
+	GetCmdArg(1, betAmount, sizeof(betAmount));
 	
 	int curCredits = Store_GetClientCredits(client);
-	int betCredits = StringToInt(arg);
+	int betCredits = StringToInt(betAmount);
+
+	if (curCredits > betCredits) { // not enough credits
+		CPrintToChat(client, "%s %t", prefix, "Not Enough Credits", curCredits);
+		return Plugin_Handled;
+	}
 	
-	float wonCredits = betCredits * winRatio.FloatValue;
+	if (betCredits < minBet.IntValue) { // bet is too small
+		CPrintToChat(client, "%s %t", prefix, "Too Few Credits", minBet.IntValue);
+		return Plugin_Handled;
+	}
 	
-	if(waitTime[client] == 0) {
-		if(args < 1 || args > 1) {
-			CPrintToChat(client, "%s %t", prefix, "Invalid Arguments");
-		} else if(args == 1) {
-			if(curCredits > betCredits) {
-				if(betCredits >= minBet.IntValue) {
-					if(betCredits <= maxCredits.IntValue) {
-						
-						// If not configured otherwise; put client into wait time
-						if(waitTimeLength.FloatValue > 0) {
-							waitTime[client] = 1;
-							CreateTimer(waitTimeLength.FloatValue, waitTimeTimer, client);
-						}
-						
-						if(randomNum == 0) {
-							// Loss
-							CPrintToChat(client, "%s %t", prefix, "Client Lost");
-							
-							Store_SetClientCredits(client, (Store_GetClientCredits(client) - betCredits));
-						} else if(randomNum == 1) {
-							// Win!
-							CPrintToChat(client, "%s %t", prefix, "Client Won", RoundToFloor(wonCredits));
-							CPrintToChatAll("%s %t", prefix, "Client Won Announce", client, RoundToFloor(wonCredits));
-							
-							Store_SetClientCredits(client, (Store_GetClientCredits(client) + RoundToFloor(wonCredits)));
-						}
-						
-					} else {
-						// Too many credits put into bet
-						CPrintToChat(client, "%s %t", prefix, "Too Many Credits", maxCredits.IntValue);
-					}
-				} else {
-					CPrintToChat(client, "%s %t", prefix, "Too Few Credits", minBet.IntValue);
-				}
-			} else {
-				// Not enough credits
-				CPrintToChat(client, "%s %t", prefix, "Not Enough Credits", curCredits);
-			}
+	if (betCredits > maxCredits.IntValue) { // bet is too big
+		CPrintToChat(client, "%s %t", prefix, "Too Many Credits", maxCredits.IntValue);
+		return Plugin_Handled;
+	}
+	
+	
+	// If configured, put client into wait time
+	if(waitTimeLength.IntValue > 0) {
+		waitTime[client] = GetTime() + waitTimeLength.IntValue;
+	}
+	
+	switch (GetRandomInt(0, 1))
+	{
+		case 0:
+		{
+			CPrintToChat(client, "%s %t", prefix, "Client Lost");
 			
+			Store_SetClientCredits(client, (Store_GetClientCredits(client) - betCredits));
 		}
-	} else {
-		// Client is in waittime
-		CPrintToChat(client, "%s %t", prefix, "Wait Time");
+		
+		case 1:
+		{
+			float wonCredits = betCredits * winRatio.FloatValue;
+			
+			CPrintToChat(client, "%s %t", prefix, "Client Won", RoundToFloor(wonCredits));
+			CPrintToChatAll("%s %t", prefix, "Client Won Announce", client, RoundToFloor(wonCredits));
+			
+			Store_SetClientCredits(client, (Store_GetClientCredits(client) + RoundToFloor(wonCredits)));
+		}
 	}
 	
 	return Plugin_Handled;
 }
 
-public Action waitTimeTimer(Handle timer, int client) {
-	if(IsClientInGame(client)) {
-		
-		waitTime[client] = 0;
-		CPrintToChat(client, "%s %t", prefix, "Wait Time Over");
-		
+bool IsValidClient(int client, bool bAllowBots = false, bool bAllowDead = true)
+{
+	if(!(1 <= client <= MaxClients) || !IsClientInGame(client) || (IsFakeClient(client) && !bAllowBots) || IsClientSourceTV(client) || IsClientReplay(client) || (!bAllowDead && !IsPlayerAlive(client)))
+	{
+		return false;
 	}
+	return true;
 }
