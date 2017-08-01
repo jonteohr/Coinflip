@@ -51,4 +51,4 @@ sm_coinflip_winratio "0.5"
  - ✓ English
  - ✓ Swedish
  - × Russian
- - × French
+ - ✓ French
