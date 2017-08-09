@@ -43,7 +43,7 @@ public void OnPluginStart() {
 public Action sm_flip(int client, int args) {
 
 	if (!IsValidClient(client)) { // invalid client
-		CPrintToChat(client, "%s %t", prefix, "Invalid Client"); 
+		ReplyToCommand(client, "%s %t", prefix, "Invalid Client"); 
 		return Plugin_Handled;
 	}
 	
