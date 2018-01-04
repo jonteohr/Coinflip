@@ -6,6 +6,7 @@
 		"en"	"You must be in game to perform this command!"
 		"sv"	"Du måste vara inne i spelet för att använda detta kommand!"
 		"fr"	"Tu dois être en jeu pour utiliser cette commande!"
+		"tr"	"Bu komutu kullanmak için oyunda olman lazım!"
 	}
 	
 	"Invalid Arguments"
@@ -13,6 +14,7 @@
 		"en"	"Invalid arguments, no credits specified!"
 		"sv"	"Ogiltiga argument, inga credits specifierade!"
 		"fr"	"Arguments non valides, pas de crédits spécifiés!"
+		"tr"	"Bilinmeyen değer, krediler belirlenemedi!"
 	}
 	
 	"Client Lost"
@@ -20,6 +22,7 @@
 		"en"	"Sorry, you lost!"
 		"sv"	"Tyvärr, du förlorade!"
 		"fr"	"Désolé, tu as perdu!"
+		"tr"	"Üzgünüm, kaybettin!"
 	}
 	
 	"Client Won"
@@ -28,6 +31,7 @@
 		"en"	"You won {1} credits!"
 		"sv"	"Du vann {1} credits!"
 		"fr"	"Tu as gagné {1} crédits!"
+		"tr"	"{1} kredi kazandın!"
 	}
 	
 	"Client Won Announce"
@@ -36,6 +40,7 @@
 		"en"	"{1} won {2} credits with a coinflip!"
 		"sv"	"{1} vann {2} credits med coinflip!"
 		"fr"	"{1} a gagné {2} crédits grâce au coinflip!"
+		"tr"	"{1} adlı oyuncu coinflipten {2} kredi kazandı!"
 	}
 	
 	"Too Many Credits"
@@ -44,6 +49,7 @@
 		"en"	"You put too many credits into the bet. Max allowed credits are: {1}."
 		"sv"	"Du la in för många credits. Max tillåtna instats är {1}."
 		"fr"	"Tu met trop de crédits pour le pari. Les nombres de crédits autorisés maximum sont: {1}."
+		"tr"	"Çok fazla kredi ortaya koydun. Izin verilen en yüksek değer : {1}"
 	}
 	
 	"Too Few Credits"
@@ -52,6 +58,7 @@
 		"en"	"You put in too little credits, minimum bet is {1}."
 		"sv"	"Du la in för lite credits, minimum instats är {1}."
 		"fr"	"Tu met trop peu de crédits, le pari minimum est {1}."
+		"tr"	"Çok düşük değer ortaya koydun, izin verilen en az değer : {1}"
 	}
 	
 	"Not Enough Credits"
@@ -60,6 +67,7 @@
 		"en"	"You don't have enough credits. You have {1} credits currently."
 		"sv"	"Du har inte tillräckligt mycket credits. Du har {1} credits tillgängligt."
 		"fr"	"Vous n'avez pas assez de crédits. Tu as actuellement {1} crédits."
+		"tr"	"Yeterli kredin yok. {1} kredin var."
 	}
 	
 	"Wait Time"
@@ -67,6 +75,7 @@
 		"en"	"You cannot bet so close to your previous bet."
 		"sv"	"Du kan inte betta så nära ditt förra bet."
 		"fr"	"Tu ne peux pas un montant de credits si près de votre pari précédent."
+		"tr"	"Çok hızlı bahis ortaya koyuyorsun. Yavaşla!"
 	}
 	
 	"Wait Time Over"
@@ -74,5 +83,6 @@
 		"en"	"Wait time is over! You can now use !flip again!"
 		"sv"	"Väntetiden är över! Du kan nu använda !flip igen!"
 		"fr"	"Le temps d'attente est terminé! Vous pouvez maintenant utiliser !flip a nouveau!"
+		"tr"	"Bekleme süren bitti! !flip'i tekrar kullanabilirsin!"
 	}
 }
